@@ -40,10 +40,10 @@
 
             var map, marker_me, marker_you;
 
-            var HUIZHOU = new google.maps.LatLng(23.041865,114.57435),
-                GZ = new google.maps.LatLng(23.359513,113.375203);
+            var HANGZHOU = new google.maps.LatLng(30.292210,120.1472568),
+                TAIZHOU = new google.maps.LatLng(28.2463279,121.2849426);
 
-            var DEFAULT_CENTER = new google.maps.LatLng(29.075375, 60.46875),
+            var DEFAULT_CENTER = new google.maps.LatLng(29.3295093, 120.39367),
                 HEART_ISLAND = new google.maps.LatLng(43.978549,15.383574);
 
             function smoothZoom(dest_zoom, callback){
@@ -183,14 +183,14 @@
                 });
 
                 marker_me = new google.maps.Marker({ 
-                    position: HUIZHOU,    
+                    position: HANGZHOU,    
                     title: "me", 
                     icon: "http://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png",
                     animation: google.maps.Animation.DROP,
                     map: map 
                 });
                 marker_you = new google.maps.Marker({ 
-                    position: GZ, 
+                    position: TAIZHOU, 
                     title: "you", 
                     icon: "http://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png",
                     animation: google.maps.Animation.DROP,
