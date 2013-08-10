@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,19 +12,10 @@
         <button id="start_btn" class="btn btn-primary btn-large centered">START</button>
         <div id="map_canvas" style="width:100%; height:100%;"></div>
         <div id="curtain"></div>
-
-
-
-
-        <div id="end_text" class="centered" style="margin-left: -250px">
-
-
-        <center>
-<canvas id="heart" width="400" height="400"></canvas>
-</center>
-           <p>Happy Valentine's Day,My Christy.</p><p style="text-align:center;">I Love You.</p></div>
+        <div id="end_text" class="centered" style="margin-left: -250px">Happy Birthday, My Rita.</div>
         <audio preload="auto" id="music">
-            <source src="music.mp3" type="audio/mpeg" />
+            <source src="music/dadada.ogg" type="audio/ogg" />
+            <source src="music/dadada.mp3" type="audio/mpeg" />
         </audio>
 
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -40,8 +30,8 @@
 
             var map, marker_me, marker_you;
 
-            var HUIZHOU = new google.maps.LatLng(23.041865,114.57435),
-                GZ = new google.maps.LatLng(23.359513,113.375203);
+            var WUHAN = new google.maps.LatLng(30.511843, 114.45591),
+                PORTUGAL = new google.maps.LatLng(40.207312, -8.425645);
 
             var DEFAULT_CENTER = new google.maps.LatLng(29.075375, 60.46875),
                 HEART_ISLAND = new google.maps.LatLng(43.978549,15.383574);
@@ -85,11 +75,31 @@
                     $("#curtain").animate({
                         height: $(window).height()
                     }, 6000, function(){
-                        $("#end_text").fadeIn("slow",function(){drawHeart();});
+                        $("#end_text").fadeIn("slow");
                     });
                 }, 3000);
             }
 
+            function willYouLoveMeForever(){
+                window.my_infowindow = new google.maps.InfoWindow({
+                    content: "I will love you forever, will you?",
+                    position: WUHAN
+                });
+                my_infowindow.open(map);
+
+                window.your_infowindow = new google.maps.InfoWindow({
+                    content: '<select>' +
+                                '<option value="yes">Yes, I will.</option>' +
+                                '<option value="yes">Yes, I will.</option>' +
+                             '</select>' +
+                             '<input type="button" value="submit" ' +
+                             'onclick="my_infowindow.close();your_infowindow.close();theEnd();" />',
+                    position: PORTUGAL
+                });
+                setTimeout(function(){
+                    your_infowindow.open(map);
+                }, 1000);
+            } 
 
             function showILoveYous(){
                 var i_love_you_s = [
@@ -118,7 +128,7 @@
                 loopInfoWindows(infowindows, 2000, function(){
                     map.panTo(DEFAULT_CENTER);
                     setTimeout(function(){
-                        theEnd();
+                        willYouLoveMeForever();
                     }, 1000);
                 });
 
@@ -127,20 +137,21 @@
             function showPhotos(){
                 var PHOTO_BASE = "photos/";
                 var photos = [
-                    { point: "43.97855, 15.38354", src: PHOTO_BASE + "1.jpeg" },
-                    { point: "43.97844, 15.38459", src: PHOTO_BASE + "2.jpeg" },
-                    { point: "43.97847, 15.38215", src: PHOTO_BASE + "3.jpeg" },
-                    { point: "43.97907, 15.38198", src: PHOTO_BASE + "4.jpeg" },
-                    { point: "43.97957, 15.38472", src: PHOTO_BASE + "5.jpeg" },
-                    { point: "43.98028, 15.38552", src: PHOTO_BASE + "6.jpeg" },
-                    { point: "43.97932, 15.38112", src: PHOTO_BASE + "7.jpeg" },
-                    { point: "43.97694, 15.38354", src: PHOTO_BASE + "8.jpeg" },
-                    { point: "43.97819, 15.38485", src: PHOTO_BASE + "9.jpeg" },
-                    { point: "43.97861, 15.38178", src: PHOTO_BASE + "10.jpeg" },
-                    { point: "43.97788, 15.38363", src: PHOTO_BASE + "11.jpeg" },
-                    { point: "43.97836, 15.38496", src: PHOTO_BASE + "12.jpeg" },
-                    { point: "43.97952, 15.38545", src: PHOTO_BASE + "13.jpeg" }
-
+                    { point: "43.97855, 15.38354", src: PHOTO_BASE + "you1.jpg" },
+                    { point: "43.97844, 15.38459", src: PHOTO_BASE + "you2.jpg" },
+                    { point: "43.97847, 15.38215", src: PHOTO_BASE + "you3.jpg" },
+                    { point: "43.97907, 15.38198", src: PHOTO_BASE + "you4.jpg" },
+                    { point: "43.97957, 15.38472", src: PHOTO_BASE + "you5.jpg" },
+                    { point: "43.98028, 15.38552", src: PHOTO_BASE + "you6.jpg" },
+                    { point: "43.97932, 15.38112", src: PHOTO_BASE + "me1.jpg" },
+                    { point: "43.97694, 15.38354", src: PHOTO_BASE + "you7.jpg" },
+                    { point: "43.97819, 15.38485", src: PHOTO_BASE + "you8.jpg" },
+                    { point: "43.97861, 15.38178", src: PHOTO_BASE + "you9.jpg" },
+                    { point: "43.97788, 15.38363", src: PHOTO_BASE + "you10.jpg" },
+                    { point: "43.97836, 15.38496", src: PHOTO_BASE + "me2.jpg" },
+                    { point: "43.97952, 15.38545", src: PHOTO_BASE + "you11.jpg" },
+                    { point: "43.97850, 15.38288", src: PHOTO_BASE + "you12.jpg" },
+                    { point: "43.97768, 15.38373", src: PHOTO_BASE + "you13.jpg" }
                 ];
                 var infowindows = [];
                 $.each(photos, function(i, photo){
@@ -163,11 +174,10 @@
             }
 
             function showHeartIsland(){
-                map.panTo(DEFAULT_CENTER);
                 map.panTo(HEART_ISLAND);
                 smoothZoom(16, function(){
                     map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
-                    setTimeout(function(){showPhotos()}, 5000);
+                    setTimeout(function(){showPhotos()}, 2000);
                 });
             }
 
@@ -177,20 +187,20 @@
                 music.play();
 
                 map = new google.maps.Map(document.getElementById("map_canvas"), {
-                    center: new google.maps.LatLng(23.342256,113.905838),
-                    zoom: 8,
+                    center: new google.maps.LatLng(29.075375, 60.46875),
+                    zoom: 3,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 });
 
                 marker_me = new google.maps.Marker({ 
-                    position: HUIZHOU,    
+                    position: WUHAN,    
                     title: "me", 
                     icon: "http://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png",
                     animation: google.maps.Animation.DROP,
                     map: map 
                 });
                 marker_you = new google.maps.Marker({ 
-                    position: GZ, 
+                    position: PORTUGAL, 
                     title: "you", 
                     icon: "http://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png",
                     animation: google.maps.Animation.DROP,
@@ -201,7 +211,7 @@
 
                 setTimeout(function(){
                     showHeartIsland();
-                }, 8000);
+                }, 4000);
             }
         }();
 
@@ -214,9 +224,12 @@
             var preloader = new PxLoader(); 
 
             for(var i = 1; i <= 13; i++){
-                preloader.add( new PxLoaderImage("photos/" +i + ".jpeg"), "you" );
+                preloader.add( new PxLoaderImage("photos/" + "you" + i + ".jpg"), "you" );
             }
-            preloader.start(["you"]);
+            for(var i = 1; i <= 2; i++){
+                preloader.add( new PxLoaderImage("photos/" + "me" + i + ".jpg"), "me" );
+            }
+            preloader.start(["you", "me"]);
 
 
         </script>
@@ -236,76 +249,5 @@
 
         </script>
 
-
-<script type="text/javascript">
-var canvas;
-var ctx;
-var rx = 200;
-var ry = 200;
-var radius = 180;
-var sleep = 0;
-var count = 0;
- 
-function deg2rad(x)
-{
-    return x *Math.PI/180;
-}
- 
-function drawCircle(x, y, r)
-{
-    ctx.beginPath();
-    ctx.arc(x,y,r,0,Math.PI*2,true);
-    ctx.stroke();
-}
- 
-function drawLine(x1, y1, x2, y2)
-{
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.stroke();
-    if (count++ == 82)  {
-        count = 0;
-        document.getElementById('redraw').disabled = false;
-        sleep = 0;
-    }
-}
- 
-function drawSide(begin1, end1, step1, begin2, step2)
-{
-    var d1, d2, x1, y1, x2, y2;
- 
-    while (begin1 != end1+step1) {
-       d1 = deg2rad(begin1);
-       d2 = deg2rad(begin2);
-       x1 = rx + radius * Math.cos(d1);
-       y1 = ry - radius * Math.sin(d1);
-       x2 = rx + radius * Math.cos(d2);
-       y2 = ry - radius * Math.sin(d2);
-       setTimeout('drawLine(' + x1 + ',' + y1 + ',' + x2 + ',' + y2 + ')', sleep*100);
-       sleep++;
- 
-       begin1 += step1;
-       begin2 += step2;
-   }
-}
- 
-function drawHeart()
-{
-   // document.getElementById('redraw').disabled = true;
-    ctx.clearRect(0,0, canvas.width, canvas.height);
-    ctx.strokeStyle = "black";
-    drawCircle(rx, ry, radius, ctx);
-    ctx.strokeStyle = "red";
-    drawSide(-90, 0, 4.5, 0, 4.5);
-    drawSide(-90, -180, -4.5, -180, -4.5);
-    drawSide(0, 180, 4.5, 90, 9);
-}
-(function() {
-    canvas = document.getElementById('heart');
-    ctx = canvas.getContext('2d');
-
-})();
-</script>
     </body>
 </html>
