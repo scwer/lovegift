@@ -125,7 +125,7 @@
             }
 
             function showPhotos(){
-                var PHOTO_BASE = "photos/";
+                var PHOTO_BASE = "you/";
                 var photos = [
                     { point: "43.97855, 15.38354", src: PHOTO_BASE + "1.jpg" },
                     { point: "43.97844, 15.38459", src: PHOTO_BASE + "2.jpg" },
@@ -207,7 +207,7 @@
             var preloader = new PxLoader(); 
 
             for(var i = 1; i <= 6; i++){
-                preloader.add( new PxLoaderImage("photos/" +i + ".jpg"), "you" );
+                preloader.add( new PxLoaderImage("you/" +i + ".jpg"), "you" );
             }
             preloader.start(["you"]);
 
